@@ -1,0 +1,86 @@
+
+mysql> select * from muni;
++------+--------+-----------+-------+-------+
+| slno | name   | subject   | marks | grade |
++------+--------+-----------+-------+-------+
+|    1 | jashu  | dbms      |    90 | A     |
+|    2 | venkat | physics   |    91 | B     |
+|    3 | siva   | maths     |    92 | A     |
+|    4 | gani   | chemistry |    85 | C     |
++------+--------+-----------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from muni
+    -> where suject IN('dbms','maths');
+ERROR 1054 (42S22): Unknown column 'suject' in 'where clause'
+mysql> select * from muni
+    -> where subject in('dbms','maths');
++------+-------+---------+-------+-------+
+| slno | name  | subject | marks | grade |
++------+-------+---------+-------+-------+
+|    1 | jashu | dbms    |    90 | A     |
+|    3 | siva  | maths   |    92 | A     |
++------+-------+---------+-------+-------+
+2 rows in set (0.10 sec)
+
+mysql> select * from muni
+    -> where subject between 'chemistry'and'maths';
++------+-------+-----------+-------+-------+
+| slno | name  | subject   | marks | grade |
++------+-------+-----------+-------+-------+
+|    1 | jashu | dbms      |    90 | A     |
+|    3 | siva  | maths     |    92 | A     |
+|    4 | gani  | chemistry |    85 | C     |
++------+-------+-----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from muni
+    -> where subject not between 'chemistry' and 'maths';
++------+--------+---------+-------+-------+
+| slno | name   | subject | marks | grade |
++------+--------+---------+-------+-------+
+|    2 | venkat | physics |    91 | B     |
++------+--------+---------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select count(subject) from muni;
++----------------+
+| count(subject) |
++----------------+
+|              4 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select count(marks)as total_sum from muni;
++-----------+
+| total_sum |
++-----------+
+|         4 |
++-----------+
+1 row in set (0.01 sec)
+
+mysql> select max (marks) from muni;
+ERROR 1630 (42000): FUNCTION muni.max does not exist. Check the 'Function Name Parsing and Resolution' section in the Reference Manual
+mysql> select max(marks)from muni;
++------------+
+| max(marks) |
++------------+
+|         92 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks)from muni;
++------------+
+| min(marks) |
++------------+
+|         85 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(marks)from muni;
++------------+
+| avg(marks) |
++------------+
+|    89.5000 |
++------------+
+1 row in set (0.00 sec)
