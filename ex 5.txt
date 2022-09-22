@@ -1,0 +1,72 @@
+mysql> create database muni;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use muni;
+Database changed
+mysql> create table muni(slno int(10),name char(9),subject char(10),marks int(10),grade char(2));
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> desc muni;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| slno    | int(10)  | YES  |     | NULL    |       |
+| name    | char(9)  | YES  |     | NULL    |       |
+| subject | char(10) | YES  |     | NULL    |       |
+| marks   | int(10)  | YES  |     | NULL    |       |
+| grade   | char(2)  | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> insert into muni values(1,'jashu','dbms',90,'A'),(2,'venkat','physics',91,'B'),(3,'siva','maths',92,'A'),(4,'gani','chemistry',85,'C');
+Query OK, 4 rows affected (0.15 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select*from muni;
++------+--------+-----------+-------+-------+
+| slno | name   | subject   | marks | grade |
++------+--------+-----------+-------+-------+
+|    1 | jashu  | dbms      |    90 | A     |
+|    2 | venkat | physics   |    91 | B     |
+|    3 | siva   | maths     |    92 | A     |
+|    4 | gani   | chemistry |    85 | C     |
++------+--------+-----------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select subject from muni;
++-----------+
+| subject   |
++-----------+
+| dbms      |
+| physics   |
+| maths     |
+| chemistry |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql> select*from muni where sl_no=2;
+ERROR 1054 (42S22): Unknown column 'sl_no' in 'where clause'
+mysql> select * from muni where slno=2;
++------+--------+---------+-------+-------+
+| slno | name   | subject | marks | grade |
++------+--------+---------+-------+-------+
+|    2 | venkat | physics |    91 | B     |
++------+--------+---------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from muni where grade='A';
++------+-------+---------+-------+-------+
+| slno | name  | subject | marks | grade |
++------+-------+---------+-------+-------+
+|    1 | jashu | dbms    |    90 | A     |
+|    3 | siva  | maths   |    92 | A     |
++------+-------+---------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks)as total_marks from muni;
++-------------+
+| total_marks |
++-------------+
+|         358 |
++-------------+
+1 row in set (0.13 sec)
